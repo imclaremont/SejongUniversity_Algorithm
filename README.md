@@ -1,1 +1,1 @@
-# SejongUniversity_Algorithm
+# 세종대학교 신동규교수님 알고리즘수업 예습목적의 레포지토리입니다
