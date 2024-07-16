@@ -32,14 +32,14 @@ int main(void) {
     selectionSort(A, n);
     QueryPerformanceCounter(&end);
     diff.QuadPart = end.QuadPart - start.QuadPart;
-    printf("%.9lf\n", ((double)diff.QuadPart / (double)ticksPerSec.QuadPart));
+    printf("%.9lfms\n", ((double)diff.QuadPart / (double)ticksPerSec.QuadPart) / 1000);
 
     QueryPerformanceFrequency(&ticksPerSec);
     QueryPerformanceCounter(&start);
     insertionSort(B, n);
     QueryPerformanceCounter(&end);
     diff.QuadPart = end.QuadPart - start.QuadPart;
-    printf("%.9lf\n", ((double)diff.QuadPart / (double)ticksPerSec.QuadPart));
+    printf("%.9lfms\n", ((double)diff.QuadPart / (double)ticksPerSec.QuadPart) / 1000);
 
     free(A);
     free(B);
