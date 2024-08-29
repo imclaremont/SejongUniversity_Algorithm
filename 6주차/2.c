@@ -25,14 +25,11 @@ int binarySearch(int* arr, int n, int key) {
     int res = n; // 기본값을 n으로 설정, 찾는 값이 없을 경우 n을 반환
     while (lowIdx <= highIdx) {
         int midIdx = lowIdx + (highIdx - lowIdx) / 2;
-
-        // 중간값이 키값보다 크거나 같은 경우, 왼쪽 절반을 탐색
-        if (arr[midIdx] >= key) {
+        if (arr[midIdx] >= key) { // 중간값이 키값보다 크거나 같은 경우, 왼쪽 절반을 탐색
             highIdx = midIdx - 1;
             res = midIdx; // 현재 위치를 잠재적인 결과로 저장
         } 
-        // 중간값이 키값보다 작은 경우, 오른쪽 절반을 탐색
-        else {
+        else { // 중간값이 키값보다 작은 경우, 오른쪽 절반을 탐색
             lowIdx = midIdx + 1;
         }
     }
