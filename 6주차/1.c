@@ -26,7 +26,6 @@ int binarySearch(int* arr, int lowIdx, int highIdx, int key) {
     }
 
     int midIdx = lowIdx + (highIdx - lowIdx) / 2;
-
     if (arr[midIdx] > key) { // 중간값이 키값보다 큰 경우, 왼쪽 절반을 탐색
         return binarySearch(arr, lowIdx, midIdx - 1, key);
     }
