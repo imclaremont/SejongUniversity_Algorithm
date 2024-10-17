@@ -135,7 +135,6 @@ void freeNode(NODE* node) {
 
     freeNode(node->lChild);
     freeNode(node->rChild);
-
     free(node);
 }
 
@@ -201,7 +200,7 @@ int updateHeight(NODE* node) {
     if (h != node->height) {
         node->height = h;
         return 1;
-    }
+    } 
     else {
         return 0;
     }
@@ -388,9 +387,9 @@ NODE* reduceExternal(NODE* externalNode) {
         else 
             grandparentNode->rChild = siblingNode; // parentNode가 오른쪽 자식인 경우
     }
-
     free(externalNode);
     free(parentNode);
+    
     return siblingNode;
 }
 
