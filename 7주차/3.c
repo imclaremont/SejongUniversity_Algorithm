@@ -15,7 +15,7 @@ typedef struct NODE {
 NODE* g_root = NULL;
 
 // 기본 메서드
-int abs(int n);
+int myAbs(int n);
 int getMax(int n, int m);
 int isExternal(NODE* node);
 int isRoot(NODE* node);
@@ -75,11 +75,12 @@ int main() {
             break;
         }
     }
+    freeNode(g_root);
 
     return 0;
 }
 
-int abs(int n) {
+int myAbs(int n) {
     return n > 0 ? n : -n;
 }
 
@@ -100,6 +101,8 @@ NODE* createEmptyNode() {
     node->parent = NULL;
     node->lChild = NULL;
     node->rChild = NULL;
+    node->key = 0;
+    node->height = 0;
     return node;
 }
 
@@ -186,7 +189,7 @@ int isBalanced(NODE* node) {
     NODE* left = node->lChild; 
     NODE* right = node->rChild;
 
-    return abs(left->height - right->height) <= 1;
+    return myAbs(left->height - right->height) <= 1;
 }
 
 int updateHeight(NODE* node) {
@@ -240,10 +243,10 @@ void searchAndFixAfterInsertion(NODE* node) {
     else 
         tallestGrandchild = tallerChild->rChild;
 
-    restructure(unbalancedNode, tallerChild, tallestGrandchild);
+    restructure(tallestGrandchild, tallerChild, unbalancedNode);
 }
 
-NODE* restructure(NODE* unbalancedNode, NODE* tallerChild, NODE* tallestGrandchild) {
+NODE* restructure(NODE* tallestGrandchild, NODE* tallerChild, NODE* unbalancedNode) {
     // 재구성될 서브트리의 노드들
     NODE* smallestNode;
     NODE* newRoot;
@@ -337,6 +340,8 @@ NODE* restructure(NODE* unbalancedNode, NODE* tallerChild, NODE* tallestGrandchi
     newRoot->rChild = largestNode;
     largestNode->parent = newRoot;
     updateHeight(newRoot);
+
+    return newRoot;
 }
 
 int deleteKey(int k) {
