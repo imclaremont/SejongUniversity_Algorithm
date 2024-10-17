@@ -353,15 +353,18 @@ int deleteKey(int k) {
         nodeToDelete = node->lChild; 
     else if (isExternal(node->rChild)) // 오른쪽 자식이 외부 노드인 경우
         nodeToDelete = node->rChild;
+    else { // 두 개의 내부 자식을 가진 노드인 경우
+        NODE* succNode = inorderSucc(node);
+        if (succNode == NULL) return -1; // 후계자가 존재하지 않을 경우 처리
+        node->key = succNode->key; // 노드의 키를 후계자의 키로 교체
+        nodeToDelete = succNode->lChild; // 후계자의 왼쪽 자식을 삭제할 노드로 설정
+    }
     
     NODE* siblingNode;
     if (isExternal(nodeToDelete)) { // 선택된 자식이 외부 노드라면
         siblingNode = reduceExternal(nodeToDelete); // 외부 노드를 제거하고 트리를 재구성
     }
     else { // 선택된 자식이 외부 노드가 아니라면
-        NODE* succNode = inorderSucc(node);
-        node->key = succNode->key; // 중위 순회 후계자의 키를 복사
-        nodeToDelete = succNode->lChild; // succNode의 왼쪽 자식을 nodeToDelete로 설정
         siblingNode = reduceExternal(nodeToDelete); // 외부 노드를 제거하고 트리를 재구성
     }
 
